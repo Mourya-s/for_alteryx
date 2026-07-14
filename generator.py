@@ -18,24 +18,12 @@ with open("generated/workflow.json", "r", encoding="utf-8") as f:
 
 # Prompt
 prompt = f"""
-Convert this Alteryx workflow.
+Return ONLY a valid JSON object.
 
-Return ONLY valid JSON.
-
-Requirements:
-
-1. Generate production-ready PySpark code.
-2. Generate a COMPLETE Databricks Asset Bundle.
-3. Include:
-   - databricks.yml
-   - resources/jobs.yml
-4. Use DAB best practices.
-5. Use include: resources/*.yml.
-6. Include a dev target.
-7. Use spark_python_task.
-8. Do not use markdown.
-9. Do not return explanations.
-10. Return only JSON.
+Do not explain.
+Do not add markdown.
+Do not add ```json.
+Do not add any text before or after.
 
 Schema:
 
@@ -61,8 +49,24 @@ with open("generated/llm_output.txt", "w", encoding="utf-8") as f:
 
 print("LLM output saved.")
 
+print("GEMINI RESPONSE:")
+print(response.text)
+
 # Parse returned JSON
-result = json.loads(response.text)
+json_text = response.text.strip()
+
+if json_text.startswith("```json"):
+    json_text = json_text.replace("```json", "", 1)
+
+if json_text.endswith("```"):
+    json_text = json_text[:-3]
+
+json_text = json_text.strip()
+
+print("PARSED RESPONSE:")
+print(json_text)
+
+result = json.loads(json_text)
 
 # Generate files
 os.makedirs("generated/src", exist_ok=True)
