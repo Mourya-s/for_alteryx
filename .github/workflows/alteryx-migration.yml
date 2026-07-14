@@ -56,11 +56,22 @@ jobs:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
-          cat > ~/.databrickscfg << EOF
-          [DEFAULT]
-          host=$DATABRICKS_HOST
-          token=$DATABRICKS_TOKEN
-          EOF
+          echo "[DEFAULT]" > ~/.databrickscfg
+          echo "host=$DATABRICKS_HOST" >> ~/.databrickscfg
+          echo "token=$DATABRICKS_TOKEN" >> ~/.databrickscfg
+
+          cat ~/.databrickscfg | sed 's/token=.*/token=***/'
+      
+      - name: Debug Databricks Auth
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: |
+          echo "HOST EXISTS:"
+          if [ -n "$DATABRICKS_HOST" ]; then echo "YES"; else echo "NO"; fi
+
+          echo "TOKEN EXISTS:"
+          if [ -n "$DATABRICKS_TOKEN" ]; then echo "YES"; else echo "NO"; fi
 
       - name: Validate Bundle
         run: |
@@ -71,3 +82,7 @@ jobs:
         run: |
           cd generated
           databricks bundle deploy
+      - name: Debug Generated Files
+        run: |
+            cat generated/databricks.yml
+            cat generated/resources/jobs.yml
