@@ -25,6 +25,23 @@ Do not add markdown.
 Do not add ```json.
 Do not add any text before or after.
 
+Requirements:
+
+1. Generate production-ready PySpark code.
+2. Generate Databricks Asset Bundle files.
+3. Workspace supports ONLY serverless compute.
+4. Do NOT generate:
+   - new_cluster
+   - existing_cluster_id
+   - job_cluster_key
+5. Use:
+   - environment_key: default
+6. Generate:
+   - databricks.yml
+   - resources/jobs.yml
+7. The generated jobs.yml must be deployable in Databricks Free Edition / Serverless workspace.
+8. Return only valid JSON.
+
 Schema:
 
 {{
