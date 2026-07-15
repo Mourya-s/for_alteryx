@@ -348,5 +348,5 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 - **Maintainer:: Mourya S
 - **Email:: mourya04reddy@gmail.com
-- **Issues:** [GitHub Issues](https://github.comteryx_migration/issues
-- **Contributing:** [Contribution Guide](https://github.com/Mourya-s/for_alteryx_migration/blob
+- **Issues:** [GitHub Issues](https://github.com/eryx_migration/issues
+- **Contributing:** [Contributionmd
