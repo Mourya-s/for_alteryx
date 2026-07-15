@@ -28,8 +28,9 @@
     <Node ToolID="11">
       <GuiSettings Plugin="AlteryxBasePluginsGui.Sort.Sort">
         <Position x="492" y="186" />
-        
+
       </GuiSettings>
+      
       <Properties>
         <Configuration>
           <SortInfo locale="1033">
