@@ -348,6 +348,6 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ## Contact
 
-- **Maintainer:** TODO: Mourya S
-- **Email:** TODO: mourya04reddy@gmail.com
-- **Issues:** [GitHub Issues](https://github.com/Mourya-s/for_alteryx/issues)
+- **Maintainer:: Mourya S
+- **Email:: mourya04reddy@gmail.com
+- **Issues:[GitHub Issues](https://github.com/Mourya-s/for_alteryx_migration)
