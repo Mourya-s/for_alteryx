@@ -94,7 +94,6 @@ Keep the summary line under ~72 characters, written in the imperative mood ("add
 4. Ensure CI (the `alteryx-migration.yml` workflow, plus any future test workflows) passes.
 5. Respond to review feedback — a maintainer will merge once approved.
 
-> TODO: Add/link a `.github/PULL_REQUEST_TEMPLATE.md` if one doesn't exist yet.
 
 ## Coding Standards
 
@@ -110,7 +109,7 @@ Keep the summary line under ~72 characters, written in the imperative mood ("add
 - Where possible, confirm the generated PySpark/Databricks code from `generator.py` runs correctly against sample data.
 - Check `validate.log` output for your change and include it or a summary in the PR description if relevant.
 
-> TODO: Formalize an automated test suite/CI test stage — currently validation is primarily manual via `validate.log`.
+
 
 ## Documentation Guidelines
 
@@ -130,8 +129,6 @@ When opening an issue, please include:
 - Your environment (Python version, Databricks runtime, OS)
 
 For feature requests, describe the Alteryx tool or capability you'd like supported, and — if possible — a sample workflow structure that uses it.
-
-> TODO: Add issue templates under `.github/ISSUE_TEMPLATE/` (bug report, feature request).
 
 ## Review Process
 
