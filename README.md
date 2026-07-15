@@ -319,7 +319,6 @@ df.groupBy("Customer") \
 - The parser is designed to **skip unknown/unsupported tools** rather than fail the whole run — see [Supported Inputs](#supported-inputs).
 - CI job steps include explicit **debug steps** ("Debug Generated Files", "Debug Databricks Auth") to surface configuration or authentication issues before deployment is attempted.
 
-> TODO: Document specific exit codes / failure conditions once formalized.
 
 ## Roadmap
 
@@ -349,4 +348,5 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 - **Maintainer:: Mourya S
 - **Email:: mourya04reddy@gmail.com
-- **Issues:[GitHub Issues](https://github.com/Mourya-s/for_alteryx_migration)
+- **Issues:** [GitHub Issues](https://github.comteryx_migration/issues
+- **Contributing:** [Contribution Guide](https://github.com/Mourya-s/for_alteryx_migration/blob
