@@ -7,7 +7,7 @@ resources:
         - task_key: migrate
 
           spark_python_task:
-            python_file: ../src/workflow.py
+            python_file: ${workspace.file_path}/src/workflow.py
 
           new_cluster:
             spark_version: "15.4.x-scala2.12"

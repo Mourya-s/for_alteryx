@@ -11,7 +11,7 @@
           <Font name="Arial" size="8.25" style="0" />
           <TextColor name="Black" />
           <FillColor name="White" />
-          
+
           <Shape shape="0" />
           <Justification Justification="4" />
         </Configuration>
@@ -24,6 +24,8 @@
     </Node>
     <Node ToolID="5">
       <GuiSettings Plugin="AlteryxGuiToolkit.Questions.Tab.Tab">
+      
+      
         <Position x="0" y="0" width="59" height="59" />
       </GuiSettings>
       <Properties>
