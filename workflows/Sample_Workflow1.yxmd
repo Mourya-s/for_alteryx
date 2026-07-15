@@ -11,6 +11,7 @@
           <Font name="Arial" size="8.25" style="0" />
           <TextColor name="Black" />
           <FillColor name="White" />
+          
           <Shape shape="0" />
           <Justification Justification="4" />
         </Configuration>
