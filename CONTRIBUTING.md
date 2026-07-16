@@ -5,7 +5,6 @@ First off, thank you for considering contributing! This project converts Alteryx
 ## Code of Conduct
 
 This project follows a Code of Conduct to ensure a welcoming and harassment-free experience for everyone.
-> TODO: Add or link a `CODE_OF_CONDUCT.md` (e.g. the [Contributor Covenant](https://www.contributor-covenant.org/)). By participating, you're expected to uphold it.
 
 ## Getting Started
 
@@ -110,7 +109,6 @@ Keep the summary line under ~72 characters, written in the imperative mood ("add
 - Check `validate.log` output for your change and include it or a summary in the PR description if relevant.
 
 
-
 ## Documentation Guidelines
 
 - Update `README.md` if you change setup steps, supported tools, secrets/configuration, or the pipeline flow.
@@ -135,6 +133,84 @@ For feature requests, describe the Alteryx tool or capability you'd like support
 - All PRs require at least one maintainer review before merging.
 - Reviewers will check for: correctness, consistency with the existing parser/generator patterns, documentation updates, and CI passing.
 - Please be patient and responsive — most review feedback is aimed at keeping the parser extensible and the generated code reliable across a wide range of Alteryx workflows.
+
+## Extending the Parser.py tools
+
+-The parser is built to be extended rather than rewritten. Example: adding support for a new tool (`CrossTab`):
+
+**Step 1 — Add the tool mapping** in `parser/parser.py`:
+
+```python
+PLUGIN_TOOL_MAP = {
+    ...
+    "CrossTab": "CrossTab",
+}
+```
+
+**Step 2 — Add a configuration extractor:**
+
+```python
+def _extract_crosstab_config(self, node):
+    config = {}
+    cfg_root = self._get_config_root(node)
+    if cfg_root is None:
+        return config
+
+    group_by = self._text(cfg_root.find(".//GroupByField"))
+    header = self._text(cfg_root.find(".//HeaderField"))
+    value = self._text(cfg_root.find(".//ValueField"))
+
+    if group_by:
+        config["group_by"] = group_by
+    if header:
+        config["header_field"] = header
+    if value:
+        config["value_field"] = value
+
+    return config
+```
+
+**Step 3 — Register the extractor** in `_extract_configuration()`:
+
+```python
+handlers = {
+    ...
+    "CrossTab": self._extract_crosstab_config,
+}
+```
+
+**Step 4 — Confirm the parsed output.** For an `Input → CrossTab → Output` workflow, the parser will emit something like:
+
+```json
+{
+  "tool_id": "5",
+  "tool_type": "CrossTab",
+  "configuration": {
+    "group_by": "Customer",
+    "header_field": "Month",
+    "value_field": "Sales"
+  }
+}
+```
+
+**Step 5 — Add generator support** in `generator.py`:
+
+```python
+if tool["tool_type"] == "CrossTab":
+    generate_crosstab(tool)
+```
+
+Which produces the Spark equivalent:
+
+```python
+df.groupBy("Customer") \
+  .pivot("Month") \
+  .sum("Sales")
+```
+
+> **Rule of thumb:** the better the underlying LLM, the better the generated Spark/DAB code — this relationship is especially noticeable for complex workflows.
+
+
 
 ## Best Practices & Repository Etiquette
 
